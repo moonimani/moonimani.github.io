@@ -3,7 +3,7 @@ async function getLiveStock(productId, size) {
 
   try {
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/inventory?sku=eq.${encodeURIComponent(sku)}&select=stock`,
+      `${`${SUPABASE_URL.replace(/\/rest\/v1\/?$/, "").replace(/\/$/, "")}/rest/v1/inventory?sku=eq.${encodeURIComponent(sku)}&select=stock`,
       {
         headers: {
           apikey: SUPABASE_PUBLISHABLE_KEY
