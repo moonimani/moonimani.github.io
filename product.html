@@ -9,6 +9,10 @@
 
 <style>
 
+/* =========================
+   GENERAL
+========================= */
+
 * {
     box-sizing: border-box;
 }
@@ -34,7 +38,9 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 header {
     background: #f9e9ee;
@@ -66,7 +72,9 @@ nav a:hover {
     color: #b87890;
 }
 
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 main {
     max-width: 1250px;
@@ -84,7 +92,9 @@ main {
     text-decoration: underline;
 }
 
-/* PRODUCT LAYOUT */
+/* =========================
+   PRODUCT LAYOUT
+========================= */
 
 .product-layout {
     display: grid;
@@ -92,11 +102,14 @@ main {
     gap: 55px;
 }
 
-/* GALLERY */
+/* =========================
+   PHOTO GALLERY
+========================= */
 
 .gallery {
     display: flex;
     gap: 15px;
+    min-width: 0;
 }
 
 .thumbnails {
@@ -108,11 +121,13 @@ main {
 .thumbnail {
     width: 75px;
     height: 90px;
+    padding: 0;
     border: 1px solid #eadfe2;
     border-radius: 8px;
     background: #f6e9ed;
     color: #a88896;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .thumbnail.active {
@@ -123,11 +138,13 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .main-photo {
     position: relative;
     flex: 1;
+    min-width: 0;
     aspect-ratio: 1 / 1.15;
     background: #f6e9ed;
     border-radius: 12px;
@@ -139,10 +156,19 @@ main {
     overflow: hidden;
 }
 
-.main-photo img {
+#photo-content {
+    display: flex;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    align-items: center;
+    justify-content: center;
+}
+
+#photo-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .gallery-arrow {
@@ -150,11 +176,17 @@ main {
     top: 50%;
     transform: translateY(-50%);
     border: none;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.9);
     width: 35px;
     height: 35px;
     border-radius: 50%;
     font-size: 20px;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.gallery-arrow:hover {
+    background: white;
 }
 
 .gallery-arrow.prev {
@@ -165,7 +197,13 @@ main {
     right: 12px;
 }
 
-/* PRODUCT INFORMATION */
+.gallery-arrow:disabled {
+    opacity: 0.4;
+}
+
+/* =========================
+   PRODUCT INFORMATION
+========================= */
 
 .category {
     font-size: 12px;
@@ -192,7 +230,9 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* SIZE */
+/* =========================
+   SIZE SELECTION
+========================= */
 
 .size-header {
     display: flex;
@@ -244,7 +284,9 @@ h1 {
     color: #9c7585;
 }
 
-/* QUANTITY */
+/* =========================
+   QUANTITY
+========================= */
 
 .quantity-label {
     font-weight: bold;
@@ -278,7 +320,9 @@ h1 {
     text-align: center;
 }
 
-/* ADD TO CART */
+/* =========================
+   ADD TO CART
+========================= */
 
 .add-cart {
     width: 100%;
@@ -309,7 +353,9 @@ h1 {
     margin-top: 22px;
 }
 
-/* ACCORDIONS */
+/* =========================
+   ACCORDIONS
+========================= */
 
 details {
     border-bottom: 1px solid #eadfe2;
@@ -327,7 +373,9 @@ details p {
     line-height: 1.7;
 }
 
-/* SIZE GUIDE MODAL */
+/* =========================
+   SIZE GUIDE MODAL
+========================= */
 
 dialog {
     border: none;
@@ -339,7 +387,7 @@ dialog {
 }
 
 dialog::backdrop {
-    background: rgba(0,0,0,0.45);
+    background: rgba(0, 0, 0, 0.45);
 }
 
 .close-modal {
@@ -358,7 +406,9 @@ dialog p {
     color: #806b74;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 footer {
     background: #f9e9ee;
@@ -368,7 +418,9 @@ footer {
     color: #806b74;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 800px) {
 
@@ -387,6 +439,7 @@ footer {
 
     .thumbnails {
         flex-direction: row;
+        flex-wrap: wrap;
     }
 
     .thumbnail {
@@ -405,12 +458,13 @@ footer {
 }
 
 </style>
-
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -427,6 +481,7 @@ footer {
         <a href="index.html#shop">Shop</a>
         <a href="faq.html">FAQ</a>
         <a href="contact.html">Contact</a>
+
         <a href="cart.html">
             🛒 Cart (<span id="cart-count">0</span>)
         </a>
@@ -434,8 +489,9 @@ footer {
 
 </header>
 
-
-<!-- MAIN -->
+<!-- =========================
+     MAIN
+========================= -->
 
 <main>
 
@@ -447,16 +503,21 @@ footer {
         <span id="breadcrumb-name">Product</span>
     </div>
 
-
     <div class="product-layout">
 
         <!-- PRODUCT GALLERY -->
 
         <div class="gallery">
 
-            <div class="thumbnails" id="thumbnails"></div>
+            <div
+                class="thumbnails"
+                id="thumbnails"
+            ></div>
 
-            <div class="main-photo" id="main-photo">
+            <div
+                class="main-photo"
+                id="main-photo"
+            >
 
                 <span id="photo-content">
                     ♡ Product photo coming soon
@@ -466,6 +527,7 @@ footer {
                     class="gallery-arrow prev"
                     id="prev-photo"
                     type="button"
+                    aria-label="Previous photo"
                 >
                     ‹
                 </button>
@@ -474,6 +536,7 @@ footer {
                     class="gallery-arrow next"
                     id="next-photo"
                     type="button"
+                    aria-label="Next photo"
                 >
                     ›
                 </button>
@@ -482,22 +545,26 @@ footer {
 
         </div>
 
-
         <!-- PRODUCT DETAILS -->
 
         <div class="product-info">
 
-            <div class="category" id="category"></div>
+            <div
+                class="category"
+                id="category"
+            ></div>
 
             <h1 id="product-name"></h1>
 
-            <div class="price" id="product-price"></div>
+            <div
+                class="price"
+                id="product-price"
+            ></div>
 
             <p class="description">
                 Beautiful press-on nails designed to add
                 a little magic to your everyday look.
             </p>
-
 
             <!-- SIZE SELECTION -->
 
@@ -505,7 +572,9 @@ footer {
 
                 <strong>
                     Size:
-                    <span id="selected-size">Please select</span>
+                    <span id="selected-size">
+                        Please select
+                    </span>
                 </strong>
 
                 <button
@@ -518,7 +587,10 @@ footer {
 
             </div>
 
-            <div class="size-options" id="size-options">
+            <div
+                class="size-options"
+                id="size-options"
+            >
 
                 <button
                     class="size-btn"
@@ -567,7 +639,6 @@ footer {
                 Checking availability…
             </p>
 
-
             <!-- QUANTITY -->
 
             <div class="quantity-label">
@@ -576,18 +647,25 @@ footer {
 
             <div class="quantity-control">
 
-                <button id="decrease" type="button" disabled>
+                <button
+                    id="decrease"
+                    type="button"
+                    disabled
+                >
                     −
                 </button>
 
                 <span id="quantity">1</span>
 
-                <button id="increase" type="button" disabled>
+                <button
+                    id="increase"
+                    type="button"
+                    disabled
+                >
                     +
                 </button>
 
             </div>
-
 
             <!-- ADD TO CART -->
 
@@ -600,39 +678,54 @@ footer {
                 Checking availability…
             </button>
 
-
             <div class="notice">
                 ♡ Shipping and return information
                 will be updated before our official launch.
             </div>
 
-
             <!-- PRODUCT INFORMATION -->
 
             <details>
-                <summary>Product Details</summary>
+
+                <summary>
+                    Product Details
+                </summary>
+
                 <p>
                     Press-on nail set available in XS, S, M,
-                    and L. Please check the size guide before ordering.
+                    and L. Please check the size guide
+                    before ordering.
                 </p>
+
             </details>
 
             <details>
-                <summary>Application & Removal</summary>
+
+                <summary>
+                    Application & Removal
+                </summary>
+
                 <p>
                     Clean and dry your natural nails before
                     application. Follow the instructions
                     provided with your adhesive.
-                    Remove gently to avoid damaging your nails.
+                    Remove gently to avoid damaging
+                    your nails.
                 </p>
+
             </details>
 
             <details>
-                <summary>Shipping & Returns</summary>
+
+                <summary>
+                    Shipping & Returns
+                </summary>
+
                 <p>
                     Our shipping and return policies
                     are being finalized.
                 </p>
+
             </details>
 
         </div>
@@ -641,8 +734,9 @@ footer {
 
 </main>
 
-
-<!-- SIZE GUIDE -->
+<!-- =========================
+     SIZE GUIDE
+========================= -->
 
 <dialog id="size-guide">
 
@@ -673,24 +767,31 @@ footer {
 
 </dialog>
 
-
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
+
     © 2026 Mooni Mani ♡
+
     <br><br>
+
     Made with love & a little moonlight.
+
 </footer>
 
-
-<!-- SUPABASE INVENTORY FILES -->
+<!-- =========================
+     INVENTORY FILES
+========================= -->
 
 <script src="inventory.js"></script>
 <script src="supabase-config.js"></script>
 <script src="supabase-inventory.js"></script>
 
-
-<!-- PRODUCT JAVASCRIPT -->
+<!-- =========================
+     PRODUCT JAVASCRIPT
+========================= -->
 
 <script>
 
@@ -706,7 +807,13 @@ const products = [
         shape: "Almond",
         length: "Medium",
         price: 12,
-        images: []
+
+        // TWO PHOTOS FOR MOONLIGHT COLLECTION
+
+        images: [
+            "Gothic Romantic Press-On Nail Sets.png",
+            "gothic-hand-1.png"
+        ]
     },
 
     {
@@ -747,23 +854,26 @@ const products = [
 
 ];
 
-
 // =====================================
 // SELECT PRODUCT
 // =====================================
 
-const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(
+    window.location.search
+);
 
-const productId = Number(params.get("id")) || 1;
+const productId =
+    Number(params.get("id")) || 1;
 
-const product = products.find(p => p.id === productId) || products[0];
+const product =
+    products.find(p => p.id === productId) ||
+    products[0];
 
 let selectedSize = "";
 
 let quantity = 1;
 
 let currentPhoto = 0;
-
 
 // =====================================
 // LIVE INVENTORY STATE
@@ -779,26 +889,32 @@ let inventoryError = false;
 
 let addingToCart = false;
 
-const statusElement = document.getElementById("stock-status");
+const statusElement =
+    document.getElementById("stock-status");
 
-const addButton = document.getElementById("add-cart");
+const addButton =
+    document.getElementById("add-cart");
 
-const sizeButtons = document.querySelectorAll(".size-btn");
-
+const sizeButtons =
+    document.querySelectorAll(".size-btn");
 
 // =====================================
 // DISPLAY PRODUCT INFORMATION
 // =====================================
 
-document.getElementById("product-name").textContent = product.name;
+document.getElementById(
+    "product-name"
+).textContent = product.name;
 
-document.getElementById("breadcrumb-name").textContent = product.name;
+document.getElementById(
+    "breadcrumb-name"
+).textContent = product.name;
 
-document.getElementById("category").textContent =
-    `${product.length} ${product.shape}`;
+document.getElementById(
+    "category"
+).textContent = `${product.length} ${product.shape}`;
 
 document.title = `${product.name} | Mooni Mani`;
-
 
 // =====================================
 // UPDATE PRICE
@@ -806,11 +922,12 @@ document.title = `${product.name} | Mooni Mani`;
 
 function updatePrice() {
 
-    document.getElementById("product-price").textContent =
+    document.getElementById(
+        "product-price"
+    ).textContent =
         `$${(product.price * quantity).toFixed(2)}`;
 
 }
-
 
 // =====================================
 // PHOTO GALLERY
@@ -818,22 +935,51 @@ function updatePrice() {
 
 function renderGallery() {
 
-    const thumbnails = document.getElementById("thumbnails");
+    const thumbnails =
+        document.getElementById("thumbnails");
 
-    const photoContent = document.getElementById("photo-content");
+    const photoContent =
+        document.getElementById("photo-content");
+
+    const prevButton =
+        document.getElementById("prev-photo");
+
+    const nextButton =
+        document.getElementById("next-photo");
 
     thumbnails.innerHTML = "";
+
+    // Show placeholder thumbnails for products
+    // that do not have photos yet.
 
     const images = product.images.length
         ? product.images
         : ["", "", ""];
 
+    // Keep photo index within range.
+
+    if (currentPhoto >= images.length) {
+        currentPhoto = 0;
+    }
+
     const currentImage = images[currentPhoto];
+
+    // Clear the previous large photo.
+
+    photoContent.replaceChildren();
 
     if (currentImage) {
 
-        photoContent.innerHTML =
-            `<img src="${currentImage}" alt="${product.name}">`;
+        const img = document.createElement("img");
+
+        img.src = currentImage;
+
+        img.alt =
+            `${product.name} - Photo ${currentPhoto + 1}`;
+
+        img.loading = "eager";
+
+        photoContent.appendChild(img);
 
     } else {
 
@@ -842,17 +988,42 @@ function renderGallery() {
 
     }
 
+    // Create one thumbnail for each photo.
+
     images.forEach((image, index) => {
 
-        const button = document.createElement("button");
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
 
         button.className =
-            "thumbnail" + (index === currentPhoto ? " active" : "");
+            "thumbnail" +
+            (index === currentPhoto ? " active" : "");
+
+        button.setAttribute(
+            "aria-label",
+            `View photo ${index + 1}`
+        );
+
+        button.setAttribute(
+            "aria-pressed",
+            String(index === currentPhoto)
+        );
 
         if (image) {
 
-            button.innerHTML =
-                `<img src="${image}" alt="Product thumbnail">`;
+            const img =
+                document.createElement("img");
+
+            img.src = image;
+
+            img.alt =
+                `${product.name} thumbnail ${index + 1}`;
+
+            img.loading = "lazy";
+
+            button.appendChild(img);
 
         } else {
 
@@ -872,33 +1043,47 @@ function renderGallery() {
 
     });
 
-}
+    // Hide arrows if a product has only one photo.
 
+    const hasMultiplePhotos = images.length > 1;
+
+    prevButton.hidden = !hasMultiplePhotos;
+
+    nextButton.hidden = !hasMultiplePhotos;
+
+}
 
 // =====================================
 // GALLERY ARROWS
 // =====================================
 
-document.getElementById("prev-photo").onclick = () => {
+document.getElementById(
+    "prev-photo"
+).onclick = () => {
 
-    const total = product.images.length || 3;
+    const total =
+        product.images.length || 3;
 
-    currentPhoto = (currentPhoto - 1 + total) % total;
-
-    renderGallery();
-
-};
-
-document.getElementById("next-photo").onclick = () => {
-
-    const total = product.images.length || 3;
-
-    currentPhoto = (currentPhoto + 1) % total;
+    currentPhoto =
+        (currentPhoto - 1 + total) % total;
 
     renderGallery();
 
 };
 
+document.getElementById(
+    "next-photo"
+).onclick = () => {
+
+    const total =
+        product.images.length || 3;
+
+    currentPhoto =
+        (currentPhoto + 1) % total;
+
+    renderGallery();
+
+};
 
 // =====================================
 // CART STORAGE
@@ -912,7 +1097,9 @@ function readCart() {
             localStorage.getItem("moonimani-cart")
         );
 
-        return Array.isArray(cart) ? cart : [];
+        return Array.isArray(cart)
+            ? cart
+            : [];
 
     } catch {
 
@@ -925,11 +1112,14 @@ function readCart() {
 function updateCartCount() {
 
     const count = readCart().reduce(
-        (total, item) => total + (Number(item.quantity) || 0),
+        (total, item) =>
+            total + (Number(item.quantity) || 0),
         0
     );
 
-    document.getElementById("cart-count").textContent = count;
+    document.getElementById(
+        "cart-count"
+    ).textContent = count;
 
 }
 
@@ -942,7 +1132,8 @@ function quantityAlreadyInCart(size) {
             item.size === size
         ) {
 
-            return total + (Number(item.quantity) || 0);
+            return total +
+                (Number(item.quantity) || 0);
 
         }
 
@@ -951,7 +1142,6 @@ function quantityAlreadyInCart(size) {
     }, 0);
 
 }
-
 
 // =====================================
 // LIVE INVENTORY HELPERS
@@ -967,8 +1157,13 @@ function remainingFor(size) {
 
     const stock = stockFor(size);
 
-    if (!Number.isInteger(stock) || stock < 0) {
+    if (
+        !Number.isInteger(stock) ||
+        stock < 0
+    ) {
+
         return 0;
+
     }
 
     return Math.max(
@@ -977,7 +1172,6 @@ function remainingFor(size) {
     );
 
 }
-
 
 // =====================================
 // UPDATE SOLD OUT DISPLAY
@@ -1005,7 +1199,8 @@ function updateAvailability() {
             Number.isInteger(stock) &&
             stock > 0;
 
-        button.disabled = !available || addingToCart;
+        button.disabled =
+            !available || addingToCart;
 
         button.classList.toggle(
             "selected",
@@ -1034,9 +1229,11 @@ function updateAvailability() {
         sizes.every(size => stockFor(size) === 0)
     ) {
 
-        statusElement.textContent = "SOLD OUT";
+        statusElement.textContent =
+            "SOLD OUT";
 
-        addButton.textContent = "SOLD OUT";
+        addButton.textContent =
+            "SOLD OUT";
 
     } else if (!selectedSize) {
 
@@ -1048,9 +1245,11 @@ function updateAvailability() {
 
     } else if (selectedStock === 0) {
 
-        statusElement.textContent = "SOLD OUT";
+        statusElement.textContent =
+            "SOLD OUT";
 
-        addButton.textContent = "SOLD OUT";
+        addButton.textContent =
+            "SOLD OUT";
 
     } else if (remaining === 0) {
 
@@ -1062,9 +1261,11 @@ function updateAvailability() {
 
     } else {
 
-        statusElement.textContent = "In stock ♡";
+        statusElement.textContent =
+            "In stock ♡";
 
-        addButton.textContent = "Add to Cart";
+        addButton.textContent =
+            "Add to Cart";
 
     }
 
@@ -1077,13 +1278,17 @@ function updateAvailability() {
 
     addButton.disabled = !canAdd;
 
-    document.getElementById("decrease").disabled =
+    document.getElementById(
+        "decrease"
+    ).disabled =
         !inventoryLoaded ||
         inventoryError ||
         addingToCart ||
         quantity <= 1;
 
-    document.getElementById("increase").disabled =
+    document.getElementById(
+        "increase"
+    ).disabled =
         !inventoryLoaded ||
         inventoryError ||
         addingToCart ||
@@ -1091,7 +1296,6 @@ function updateAvailability() {
         quantity >= remaining;
 
 }
-
 
 // =====================================
 // LOAD INVENTORY FROM SUPABASE
@@ -1107,7 +1311,9 @@ async function loadInventory() {
 
     try {
 
-        if (typeof getLiveStock !== "function") {
+        if (
+            typeof getLiveStock !== "function"
+        ) {
 
             throw new Error(
                 "Supabase inventory function is missing."
@@ -1116,13 +1322,20 @@ async function loadInventory() {
         }
 
         const results = await Promise.all(
-            sizes.map(size => getLiveStock(product.id, size))
+
+            sizes.map(size =>
+                getLiveStock(product.id, size)
+            )
+
         );
 
         if (
+
             results.some(stock =>
-                !Number.isInteger(stock) || stock < 0
+                !Number.isInteger(stock) ||
+                stock < 0
             )
+
         ) {
 
             throw new Error(
@@ -1139,7 +1352,10 @@ async function loadInventory() {
 
     } catch (error) {
 
-        console.error("Inventory loading error:", error);
+        console.error(
+            "Inventory loading error:",
+            error
+        );
 
         inventoryError = true;
 
@@ -1152,7 +1368,6 @@ async function loadInventory() {
     }
 
 }
-
 
 // =====================================
 // SIZE SELECTION
@@ -1170,8 +1385,9 @@ sizeButtons.forEach(button => {
 
         quantity = 1;
 
-        document.getElementById("selected-size").textContent =
-            selectedSize;
+        document.getElementById(
+            "selected-size"
+        ).textContent = selectedSize;
 
         updateQuantity();
 
@@ -1181,14 +1397,15 @@ sizeButtons.forEach(button => {
 
 });
 
-
 // =====================================
 // QUANTITY
 // =====================================
 
 function updateQuantity() {
 
-    document.getElementById("quantity").textContent = quantity;
+    document.getElementById(
+        "quantity"
+    ).textContent = quantity;
 
     updatePrice();
 
@@ -1196,7 +1413,9 @@ function updateQuantity() {
 
 }
 
-document.getElementById("decrease").onclick = () => {
+document.getElementById(
+    "decrease"
+).onclick = () => {
 
     if (quantity > 1) {
 
@@ -1208,13 +1427,17 @@ document.getElementById("decrease").onclick = () => {
 
 };
 
-document.getElementById("increase").onclick = () => {
+document.getElementById(
+    "increase"
+).onclick = () => {
 
     if (!selectedSize) {
         return;
     }
 
-    if (quantity < remainingFor(selectedSize)) {
+    if (
+        quantity < remainingFor(selectedSize)
+    ) {
 
         quantity++;
 
@@ -1224,20 +1447,27 @@ document.getElementById("increase").onclick = () => {
 
 };
 
-
 // =====================================
 // ADD TO CART
 // =====================================
 
 addButton.onclick = async () => {
 
-    if (addingToCart || inventoryError || !inventoryLoaded) {
+    if (
+        addingToCart ||
+        inventoryError ||
+        !inventoryLoaded
+    ) {
+
         return;
+
     }
 
     if (!selectedSize) {
 
-        alert("Please select your nail size first ♡");
+        alert(
+            "Please select your nail size first ♡"
+        );
 
         return;
 
@@ -1269,14 +1499,17 @@ addButton.onclick = async () => {
 
         liveStock[selectedSize] = latestStock;
 
-        const remaining = remainingFor(selectedSize);
+        const remaining =
+            remainingFor(selectedSize);
 
         if (remaining < quantity) {
 
             alert(
+
                 remaining === 0
                     ? "Sorry, this size is currently unavailable ♡"
                     : "There isn't enough stock for that quantity ♡"
+
             );
 
             return;
@@ -1298,9 +1531,13 @@ addButton.onclick = async () => {
         } else {
 
             cart.push({
+
                 id: product.id,
+
                 size: selectedSize,
+
                 quantity: quantity
+
             });
 
         }
@@ -1312,7 +1549,9 @@ addButton.onclick = async () => {
 
         updateCartCount();
 
-        alert(`${product.name} added to your cart ♡`);
+        alert(
+            `${product.name} added to your cart ♡`
+        );
 
         quantity = 1;
 
@@ -1320,7 +1559,10 @@ addButton.onclick = async () => {
 
     } catch (error) {
 
-        console.error("Add to cart error:", error);
+        console.error(
+            "Add to cart error:",
+            error
+        );
 
         alert(
             "We couldn't verify availability. Please try again ♡"
@@ -1336,25 +1578,28 @@ addButton.onclick = async () => {
 
 };
 
-
 // =====================================
 // SIZE GUIDE
 // =====================================
 
-const guide = document.getElementById("size-guide");
+const guide =
+    document.getElementById("size-guide");
 
-document.getElementById("open-guide").onclick = () => {
+document.getElementById(
+    "open-guide"
+).onclick = () => {
 
     guide.showModal();
 
 };
 
-document.getElementById("close-guide").onclick = () => {
+document.getElementById(
+    "close-guide"
+).onclick = () => {
 
     guide.close();
 
 };
-
 
 // =====================================
 // INITIALIZE
