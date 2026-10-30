@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
 <title>Mooni Mani | Press-On Nails</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -94,7 +96,7 @@ nav a {
     gap: 25px;
 }
 
-/* PRODUCT BOX */
+/* PRODUCT CARDS */
 
 .product-card {
     background: white;
@@ -108,7 +110,7 @@ nav a {
     transform: translateY(-5px);
 }
 
-/* IMAGE PLACEHOLDER */
+/* IMAGE PLACEHOLDERS */
 
 .product-image {
     width: 100%;
@@ -141,18 +143,88 @@ nav a {
     margin-bottom: 18px;
 }
 
+.size-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #E9D7DD;
+    border-radius: 8px;
+    background: white;
+}
+
 .product-button {
-    display: inline-block;
+    width: 100%;
     background: #C98FA1;
     color: white;
-    padding: 12px 25px;
+    padding: 12px;
+    border: none;
     border-radius: 10px;
-    text-decoration: none;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .product-button:hover {
     background: #B77B8D;
+}
+
+/* SHOPPING CART */
+
+.cart-section {
+    max-width: 800px;
+    margin: 0 auto 80px;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.cart-section h2 {
+    text-align: center;
+    color: #A66B7B;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #F1E5E9;
+    gap: 15px;
+}
+
+.cart-item button {
+    background: #FCE9EE;
+    color: #805E69;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #A66B7B;
+    margin-top: 25px;
+}
+
+.checkout-button {
+    display: block;
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    background: #C98FA1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.checkout-button:disabled {
+    background: #D9C9CE;
+    cursor: not-allowed;
 }
 
 /* FOOTER */
@@ -181,26 +253,42 @@ footer {
     .hero h1 {
         font-size: 28px;
     }
+
+    .cart-section {
+        margin: 20px;
+    }
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
+
     <div class="logo">☾ Mooni Mani</div>
-    <p class="tagline">A little moonlight at your fingertips ✨</p>
+
+    <p class="tagline">
+        A little moonlight at your fingertips ✨
+    </p>
 
     <nav>
         <a href="index.html">Home</a>
         <a href="#shop">Shop</a>
+        <a href="#cart">Cart (<span id="cart-count">0</span>)</a>
         <a href="contact.html">Contact</a>
     </nav>
+
 </header>
 
 <section class="hero">
+
     <h1>Pretty Nails, Made Easy ♡</h1>
-    <p>Discover your next favorite press-on nail set.</p>
+
+    <p>
+        Discover your next favorite press-on nail set.
+    </p>
+
 </section>
 
 <section class="shop" id="shop">
@@ -211,96 +299,331 @@ footer {
         Cute, affordable press-on nails for every occasion.
     </p>
 
-    <div class="product-grid">
+    <div class="product-grid" id="product-grid"></div>
 
-        <!-- PRODUCT 1 -->
+</section>
 
-        <div class="product-card">
-            <div class="product-image">
-                ♡ Product Photo Coming Soon
-            </div>
+<section class="cart-section" id="cart">
 
-            <div class="product-info">
-                <h3>Moonlight Collection</h3>
-                <p class="price">$12.00</p>
-                <a href="contact.html" class="product-button">
-                    Inquire
-                </a>
-            </div>
-        </div>
+    <h2>🛍️ Your Shopping Cart</h2>
 
-        <!-- PRODUCT 2 -->
-
-        <div class="product-card">
-            <div class="product-image">
-                ♡ Product Photo Coming Soon
-            </div>
-
-            <div class="product-info">
-                <h3>Blush Collection</h3>
-                <p class="price">$12.00</p>
-                <a href="contact.html" class="product-button">
-                    Inquire
-                </a>
-            </div>
-        </div>
-
-        <!-- PRODUCT 3 -->
-
-        <div class="product-card">
-            <div class="product-image">
-                ♡ Product Photo Coming Soon
-            </div>
-
-            <div class="product-info">
-                <h3>French Tip Collection</h3>
-                <p class="price">$12.00</p>
-                <a href="contact.html" class="product-button">
-                    Inquire
-                </a>
-            </div>
-        </div>
-
-        <!-- PRODUCT 4 -->
-
-        <div class="product-card">
-            <div class="product-image">
-                ♡ Product Photo Coming Soon
-            </div>
-
-            <div class="product-info">
-                <h3>Sweetheart Collection</h3>
-                <p class="price">$12.00</p>
-                <a href="contact.html" class="product-button">
-                    Inquire
-                </a>
-            </div>
-        </div>
-
-        <!-- PRODUCT 5 -->
-
-        <div class="product-card">
-            <div class="product-image">
-                ♡ Product Photo Coming Soon
-            </div>
-
-            <div class="product-info">
-                <h3>Celestial Collection</h3>
-                <p class="price">$12.00</p>
-                <a href="contact.html" class="product-button">
-                    Inquire
-                </a>
-            </div>
-        </div>
-
+    <div id="cart-items">
+        Your cart is empty.
     </div>
+
+    <div class="cart-total">
+        Subtotal: $<span id="cart-total">0.00</span>
+    </div>
+
+    <p style="text-align:center; font-size:13px; color:#987B85;">
+        Shipping and taxes are not included.
+    </p>
+
+    <button class="checkout-button" disabled>
+        Checkout Coming Soon ♡
+    </button>
+
 </section>
 
 <footer>
+
     © 2026 Mooni Mani ♡
+
     <br>
+
     Made with love & a little moonlight.
+
 </footer>
+
+<script>
+
+/* PRODUCTS */
+
+const products = [
+    {
+        id: 1,
+        name: "Moonlight Collection",
+        price: 12.00
+    },
+    {
+        id: 2,
+        name: "Blush Collection",
+        price: 12.00
+    },
+    {
+        id: 3,
+        name: "French Tip Collection",
+        price: 12.00
+    },
+    {
+        id: 4,
+        name: "Sweetheart Collection",
+        price: 12.00
+    },
+    {
+        id: 5,
+        name: "Celestial Collection",
+        price: 12.00
+    }
+];
+
+/* SHOPPING CART DATA */
+
+let cart = [];
+
+try {
+    const savedCart = JSON.parse(
+        localStorage.getItem("moonimani-cart")
+    );
+
+    if (Array.isArray(savedCart)) {
+        cart = savedCart.filter(item =>
+            products.some(product => product.id === item.id) &&
+            ["XS", "S", "M", "L"].includes(item.size) &&
+            Number.isInteger(item.quantity) &&
+            item.quantity > 0
+        );
+    }
+} catch (error) {
+    cart = [];
+}
+
+/* DISPLAY PRODUCTS */
+
+function displayProducts() {
+
+    const grid = document.getElementById("product-grid");
+
+    grid.innerHTML = "";
+
+    products.forEach(product => {
+
+        const card = document.createElement("div");
+
+        card.className = "product-card";
+
+        card.innerHTML = `
+            <div class="product-image">
+                ♡ Product Photo Coming Soon
+            </div>
+
+            <div class="product-info">
+
+                <h3>${product.name}</h3>
+
+                <p class="price">
+                    $${product.price.toFixed(2)}
+                </p>
+
+                <select
+                    class="size-select"
+                    id="size-${product.id}"
+                    aria-label="Choose size for ${product.name}"
+                >
+                    <option value="">Select Size</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                </select>
+
+                <button
+                    class="product-button"
+                    onclick="addToCart(${product.id})"
+                >
+                    Add to Cart ♡
+                </button>
+
+            </div>
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+/* ADD TO CART */
+
+function addToCart(productId) {
+
+    const product = products.find(
+        item => item.id === productId
+    );
+
+    const size = document.getElementById(
+        `size-${productId}`
+    ).value;
+
+    if (!size) {
+        alert("Please select your nail size first ♡");
+        return;
+    }
+
+    const existingItem = cart.find(
+        item =>
+            item.id === productId &&
+            item.size === size
+    );
+
+    if (existingItem) {
+
+        existingItem.quantity += 1;
+
+    } else {
+
+        cart.push({
+            id: product.id,
+            size: size,
+            quantity: 1
+        });
+
+    }
+
+    saveCart();
+    displayCart();
+
+    alert(`${product.name} (${size}) added to cart! ♡`);
+
+}
+
+/* SAVE CART */
+
+function saveCart() {
+
+    localStorage.setItem(
+        "moonimani-cart",
+        JSON.stringify(cart)
+    );
+
+}
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(index, amount) {
+
+    cart[index].quantity += amount;
+
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+    }
+
+    saveCart();
+    displayCart();
+
+}
+
+/* REMOVE ITEM */
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    saveCart();
+    displayCart();
+
+}
+
+/* DISPLAY SHOPPING CART */
+
+function displayCart() {
+
+    const cartItems = document.getElementById("cart-items");
+
+    const cartCount = document.getElementById("cart-count");
+
+    const cartTotal = document.getElementById("cart-total");
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+    let count = 0;
+
+    if (cart.length === 0) {
+
+        cartItems.textContent = "Your cart is empty ♡";
+
+    } else {
+
+        cart.forEach((item, index) => {
+
+            const product = products.find(
+                product => product.id === item.id
+            );
+
+            if (!product) return;
+
+            const itemTotal = product.price * item.quantity;
+
+            total += itemTotal;
+            count += item.quantity;
+
+            const row = document.createElement("div");
+
+            row.className = "cart-item";
+
+            const details = document.createElement("div");
+
+            const name = document.createElement("strong");
+            name.textContent = product.name;
+
+            const description = document.createElement("div");
+            description.textContent =
+                `Size: ${item.size} | $${product.price.toFixed(2)} each`;
+
+            details.appendChild(name);
+            details.appendChild(description);
+
+            const controls = document.createElement("div");
+
+            const minus = document.createElement("button");
+            minus.textContent = "−";
+            minus.setAttribute("aria-label", "Decrease quantity");
+            minus.onclick = () => changeQuantity(index, -1);
+
+            const quantity = document.createElement("span");
+            quantity.textContent = ` ${item.quantity} `;
+
+            const plus = document.createElement("button");
+            plus.textContent = "+";
+            plus.setAttribute("aria-label", "Increase quantity");
+            plus.onclick = () => changeQuantity(index, 1);
+
+            const remove = document.createElement("button");
+            remove.textContent = "Remove";
+            remove.onclick = () => removeItem(index);
+
+            const price = document.createElement("div");
+            price.textContent = `$${itemTotal.toFixed(2)}`;
+
+            controls.append(
+                minus,
+                quantity,
+                plus,
+                remove,
+                price
+            );
+
+            row.append(details, controls);
+
+            cartItems.appendChild(row);
+
+        });
+
+    }
+
+    cartCount.textContent = count;
+
+    cartTotal.textContent = total.toFixed(2);
+
+}
+
+/* INITIALIZE */
+
+displayProducts();
+displayCart();
+
+</script>
 
 </body>
 </html>
