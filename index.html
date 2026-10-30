@@ -183,6 +183,27 @@ h1 {
     font-size: 16px;
 }
 
+/* LIVE INVENTORY STATUS */
+
+.stock-status {
+    margin-top: 10px;
+    min-height: 18px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    color: #a46c82;
+}
+
+.stock-status.sold-out {
+    color: #ad657b;
+}
+
+.stock-status.unavailable {
+    color: #8d7980;
+    font-weight: normal;
+    letter-spacing: 0;
+}
+
 /* FOOTER */
 
 footer {
@@ -365,6 +386,13 @@ footer {
 </footer>
 
 
+<!-- SUPABASE INVENTORY FILES -->
+
+<script src="inventory.js"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-inventory.js"></script>
+
+
 <!-- JAVASCRIPT -->
 
 <script>
@@ -436,6 +464,20 @@ const products = [
 let activeFilter = "All";
 
 
+/* INVENTORY STATE */
+
+/*
+    null      = still checking
+    "soldout" = no sizes available
+    "instock" = at least one size available
+    "error"   = inventory could not be verified
+*/
+
+const productAvailability = {};
+
+const nailSizes = ["XS", "S", "M", "L"];
+
+
 /* READ CART */
 
 function readCart() {
@@ -467,6 +509,51 @@ function updateCount() {
     );
 
     document.getElementById("cart-count").textContent = count;
+
+}
+
+
+/* INVENTORY STATUS HTML */
+
+function getAvailabilityHTML(productId) {
+
+    const status = productAvailability[productId];
+
+    if (status === "soldout") {
+
+        return `
+            <div class="stock-status sold-out">
+                SOLD OUT
+            </div>
+        `;
+
+    }
+
+    if (status === "instock") {
+
+        return `
+            <div class="stock-status">
+                In Stock ♡
+            </div>
+        `;
+
+    }
+
+    if (status === "error") {
+
+        return `
+            <div class="stock-status unavailable">
+                Availability unavailable
+            </div>
+        `;
+
+    }
+
+    return `
+        <div class="stock-status unavailable">
+            Checking availability…
+        </div>
+    `;
 
 }
 
@@ -601,12 +688,112 @@ function renderProducts() {
 
             </div>
 
+
+            ${getAvailabilityHTML(product.id)}
+
         `;
 
 
         grid.appendChild(card);
 
     });
+
+}
+
+
+/* LOAD LIVE INVENTORY */
+
+async function loadHomepageInventory() {
+
+    if (typeof getLiveStock !== "function") {
+
+        console.error(
+            "Supabase inventory function is missing."
+        );
+
+        products.forEach(product => {
+
+            productAvailability[product.id] = "error";
+
+        });
+
+        renderProducts();
+
+        return;
+
+    }
+
+    /*
+        Each product has four sizes.
+
+        If every size has stock 0,
+        the entire collection is SOLD OUT.
+
+        If at least one size has stock,
+        the collection is In Stock.
+
+        If inventory cannot be verified,
+        we show an unavailable message
+        instead of assuming stock exists.
+    */
+
+    await Promise.all(
+
+        products.map(async product => {
+
+            try {
+
+                const stocks = await Promise.all(
+
+                    nailSizes.map(size =>
+                        getLiveStock(product.id, size)
+                    )
+
+                );
+
+                const validStocks = stocks.every(stock =>
+
+                    Number.isInteger(stock) &&
+                    stock >= 0
+
+                );
+
+                if (!validStocks) {
+
+                    throw new Error(
+                        "Could not verify inventory."
+                    );
+
+                }
+
+                const hasStock = stocks.some(stock =>
+                    stock > 0
+                );
+
+                productAvailability[product.id] =
+                    hasStock ? "instock" : "soldout";
+
+            } catch (error) {
+
+                console.error(
+                    `Inventory error for ${product.name}:`,
+                    error
+                );
+
+                productAvailability[product.id] = "error";
+
+            }
+
+            /*
+                Update the product grid as each
+                collection finishes checking.
+            */
+
+            renderProducts();
+
+        })
+
+    );
 
 }
 
@@ -645,6 +832,8 @@ document.getElementById("sort").onchange = renderProducts;
 updateCount();
 
 renderProducts();
+
+loadHomepageInventory();
 
 </script>
 
