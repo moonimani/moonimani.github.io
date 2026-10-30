@@ -561,10 +561,7 @@ footer {
                 id="product-price"
             ></div>
 
-            <p class="description">
-                Beautiful press-on nails designed to add
-                a little magic to your everyday look.
-            </p>
+            <p class="description" id="product-description"></p>
 
             <!-- SIZE SELECTION -->
 
@@ -917,6 +914,8 @@ document.getElementById(
 ).textContent = `${product.length} ${product.shape}`;
 
 document.title = `${product.name} | Mooni Mani`;
+document.getElementById("product-description").textContent =
+    product.description || "Beautiful press-on nails designed to add a little magic to your everyday look.";
 
 // =====================================
 // UPDATE PRICE
