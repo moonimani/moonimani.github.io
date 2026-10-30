@@ -1,21 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mooni Mani | Press-On Nails</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mooni Mani | Press-On Nails</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #FFF9F7;
+    color: #594B50;
+}
+
+/* HEADER */
+
+header {
+    background: #FCE9EE;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+.logo {
+    font-size: 38px;
+    font-weight: bold;
+    color: #A66B7B;
+    letter-spacing: 2px;
+}
+
+.tagline {
+    color: #987B85;
+    font-size: 14px;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #805E69;
+    margin: 0 15px;
+    font-size: 14px;
+}
+
+/* HERO */
+
+.hero {
+    text-align: center;
+    padding: 65px 20px;
+}
+
+.hero h1 {
+    color: #A66B7B;
+    font-size: 36px;
+}
+
+.hero p {
+    color: #987B85;
+}
+
+/* SHOP */
+
+.shop {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 20px 80px;
+}
+
+.shop h2 {
+    text-align: center;
+    color: #A66B7B;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.shop-description {
+    text-align: center;
+    color: #987B85;
+    margin-bottom: 45px;
+}
+
+/* PRODUCT GRID */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* PRODUCT BOX */
+
+.product-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* IMAGE PLACEHOLDER */
+
+.product-image {
+    width: 100%;
+    height: 260px;
+    background: #F9E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #B88A98;
+    font-size: 15px;
+}
+
+/* PRODUCT DETAILS */
+
+.product-info {
+    padding: 22px;
+    text-align: center;
+}
+
+.product-info h3 {
+    color: #805E69;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 17px;
+    color: #A66B7B;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.product-button {
+    display: inline-block;
+    background: #C98FA1;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.product-button:hover {
+    background: #B77B8D;
+}
+
+/* FOOTER */
+
+footer {
+    background: #FCE9EE;
+    text-align: center;
+    padding: 30px;
+    color: #987B85;
+    font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+}
+</style>
 </head>
 
-<body style="background-color:#FFF5F7; text-align:center; font-family:Arial; padding:50px;">
+<body>
 
-    <h1>🌙 Mooni Mani</h1>
-    <h2>Press-On Nail Boutique</h2>
+<header>
+    <div class="logo">☾ Mooni Mani</div>
+    <p class="tagline">A little moonlight at your fingertips ✨</p>
 
-    <p>A little moonlight at your fingertips ✨</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
 
-    <h3>Coming Soon!</h3>
+<section class="hero">
+    <h1>Pretty Nails, Made Easy ♡</h1>
+    <p>Discover your next favorite press-on nail set.</p>
+</section>
 
-    <p>Beautiful nails, made for you.</p>
+<section class="shop" id="shop">
+
+    <h2>Shop Our Nails 🌙</h2>
+
+    <p class="shop-description">
+        Cute, affordable press-on nails for every occasion.
+    </p>
+
+    <div class="product-grid">
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product-card">
+            <div class="product-image">
+                ♡ Product Photo Coming Soon
+            </div>
+
+            <div class="product-info">
+                <h3>Moonlight Collection</h3>
+                <p class="price">$12.00</p>
+                <a href="contact.html" class="product-button">
+                    Inquire
+                </a>
+            </div>
+        </div>
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product-card">
+            <div class="product-image">
+                ♡ Product Photo Coming Soon
+            </div>
+
+            <div class="product-info">
+                <h3>Blush Collection</h3>
+                <p class="price">$12.00</p>
+                <a href="contact.html" class="product-button">
+                    Inquire
+                </a>
+            </div>
+        </div>
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product-card">
+            <div class="product-image">
+                ♡ Product Photo Coming Soon
+            </div>
+
+            <div class="product-info">
+                <h3>French Tip Collection</h3>
+                <p class="price">$12.00</p>
+                <a href="contact.html" class="product-button">
+                    Inquire
+                </a>
+            </div>
+        </div>
+
+        <!-- PRODUCT 4 -->
+
+        <div class="product-card">
+            <div class="product-image">
+                ♡ Product Photo Coming Soon
+            </div>
+
+            <div class="product-info">
+                <h3>Sweetheart Collection</h3>
+                <p class="price">$12.00</p>
+                <a href="contact.html" class="product-button">
+                    Inquire
+                </a>
+            </div>
+        </div>
+
+        <!-- PRODUCT 5 -->
+
+        <div class="product-card">
+            <div class="product-image">
+                ♡ Product Photo Coming Soon
+            </div>
+
+            <div class="product-info">
+                <h3>Celestial Collection</h3>
+                <p class="price">$12.00</p>
+                <a href="contact.html" class="product-button">
+                    Inquire
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    © 2026 Mooni Mani ♡
+    <br>
+    Made with love & a little moonlight.
+</footer>
 
 </body>
 </html>
