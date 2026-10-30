@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact Us | Mooni Mani</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #FFF9F7;
+    color: #594B50;
+}
+
+header {
+    background: #FCE9EE;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+.logo {
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #A66B7B;
+}
+
+.tagline {
+    font-size: 14px;
+    color: #987B85;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #805E69;
+    margin: 0 15px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #D68FA3;
+}
+
+.container {
+    max-width: 650px;
+    margin: 60px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    color: #A66B7B;
+}
+
+.description {
+    line-height: 1.8;
+    color: #806E74;
+    margin-bottom: 35px;
+}
+
+.contact-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 22px;
+    border: 1px solid #E9D7DD;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+textarea {
+    height: 130px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: #C98FA1;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #B77B8D;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #FCE9EE;
+    font-size: 13px;
+    color: #987B85;
+}
+
+@media(max-width:600px) {
+    .contact-box {
+        padding: 25px;
+    }
+
+    nav a {
+        margin: 0 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">☾ Mooni Mani</div>
+
+    <p class="tagline">
+        A little moonlight at your fingertips ✨
+    </p>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <h1>Let's Chat ♡</h1>
+
+    <p class="description">
+        Have a question about our press-on nails,
+        sizing, orders, or collaborations?
+
+        <br><br>
+
+        We'd love to hear from you!
+        Send us a message below.
+    </p>
+
+    <div class="contact-box">
+
+        <form id="contactForm">
+
+            <label for="name">Your Name *</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
+                required
+            >
+
+            <label for="email">Email Address *</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+            >
+
+            <label for="subject">What can we help you with?</label>
+
+            <select id="subject" name="subject">
+                <option>General Inquiry</option>
+                <option>Order Question</option>
+                <option>Nail Sizing Help</option>
+                <option>Shipping Question</option>
+                <option>Collaboration</option>
+                <option>Other</option>
+            </select>
+
+            <label for="message">Your Message *</label>
+
+            <textarea
+                id="message"
+                name="message"
+                placeholder="Write your message here..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Send Message ♡
+            </button>
+
+            <p id="formStatus" role="status"
+               style="font-size:13px;text-align:center;">
+            </p>
+
+        </form>
+
+    </div>
+
+</main>
+
+<footer>
+    © 2026 Mooni Mani ♡
+    <br>
+    Made with love & a little moonlight.
+</footer>
+
+<script>
+document.getElementById("contactForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    document.getElementById("formStatus").textContent =
+        "Our contact form is coming soon! " +
+        "Messages are not being sent yet.";
+
+});
+</script>
+
+</body>
+</html>
