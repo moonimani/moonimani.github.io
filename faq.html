@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FAQ | Mooni Mani</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #FFF9F7;
+    color: #594B50;
+}
+
+/* HEADER */
+
+header {
+    background: #FCE9EE;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+.logo {
+    font-size: 38px;
+    font-weight: bold;
+    color: #A66B7B;
+    letter-spacing: 2px;
+}
+
+.tagline {
+    color: #987B85;
+    font-size: 14px;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #805E69;
+    margin: 0 15px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #C98FA1;
+}
+
+/* FAQ SECTION */
+
+.faq-section {
+    max-width: 850px;
+    margin: 60px auto 90px;
+    padding: 20px;
+}
+
+.faq-section h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #A66B7B;
+    margin-bottom: 15px;
+}
+
+.faq-description {
+    text-align: center;
+    color: #987B85;
+    margin-bottom: 45px;
+    line-height: 1.7;
+}
+
+.faq-category {
+    color: #A66B7B;
+    margin-top: 45px;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* FAQ BOXES */
+
+.faq-item {
+    background: white;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    overflow: hidden;
+}
+
+.faq-item summary {
+    padding: 20px 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #805E69;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: "+";
+    font-size: 24px;
+    color: #C98FA1;
+}
+
+.faq-item[open] summary::after {
+    content: "−";
+}
+
+.faq-item summary:hover {
+    background: #FFF5F7;
+}
+
+.faq-answer {
+    padding: 0 25px 22px;
+    color: #806E74;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.faq-answer a {
+    color: #A66B7B;
+}
+
+/* FOOTER */
+
+footer {
+    background: #FCE9EE;
+    text-align: center;
+    padding: 30px;
+    color: #987B85;
+    font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .faq-section h1 {
+        font-size: 28px;
+    }
+
+    nav a {
+        margin: 0 8px;
+        font-size: 13px;
+    }
+
+    .faq-item summary {
+        padding: 18px;
+        font-size: 14px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">☾ Mooni Mani</div>
+
+    <p class="tagline">
+        A little moonlight at your fingertips ✨
+    </p>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#shop">Shop</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+        <a href="index.html#cart">🛒 Cart</a>
+    </nav>
+
+</header>
+
+<!-- FAQ PAGE -->
+
+<main class="faq-section">
+
+    <h1>Frequently Asked Questions 🌙</h1>
+
+    <p class="faq-description">
+        Have questions? We've got answers! ♡
+        <br>
+        Everything you need to know about Mooni Mani.
+    </p>
+
+    <!-- SIZING -->
+
+    <h2 class="faq-category">♡ Sizing & Fit</h2>
+
+    <details class="faq-item">
+        <summary>How do I know my nail size?</summary>
+        <div class="faq-answer">
+            We offer XS, S, M, and L nail sizes.
+            Measure the width of your natural nails
+            at their widest points and compare your
+            measurements with our sizing guide.
+
+            Sizing may vary between manufacturers.
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary>What if I'm between two sizes?</summary>
+        <div class="faq-answer">
+            If you're between sizes, choosing the
+            slightly larger nail may allow you to
+            gently file the sides for a better fit,
+            provided the nail design allows it.
+        </div>
+    </details>
+
+    <!-- APPLICATION -->
+
+    <h2 class="faq-category">♡ Application & Nail Care</h2>
+
+    <details class="faq-item">
+        <summary>How long do press-on nails last?</summary>
+        <div class="faq-answer">
+            Wear time depends on nail preparation,
+            adhesive type, and daily activities.
+
+            Adhesive tabs typically provide shorter wear,
+            while nail glue may provide longer-lasting
+            adhesion.
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary>Are press-on nails reusable?</summary>
+        <div class="faq-answer">
+            Some press-on nails can be reused if
+            carefully removed and maintained.
+
+            Reusability depends on the material,
+            adhesive, and condition of the nails.
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary>How do I apply press-on nails?</summary>
+        <div class="faq-answer">
+            Start with clean, dry nails.
+
+            Select the correct size for each finger,
+            prepare your nails according to the
+            instructions provided, and apply your
+            chosen adhesive as directed.
+
+            Avoid applying nails over irritated
+            or damaged skin.
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary>How do I remove my press-on nails?</summary>
+        <div class="faq-answer">
+            Follow the removal instructions for
+            the adhesive you used.
+
+            Never forcefully pull or pry off
+            press-on nails, as this can damage
+            your natural nails.
+        </div>
+    </details>
+
+    <!-- ORDERS -->
+
+    <h2 class="faq-category">♡ Orders & Shipping</h2>
+
+    <details class="faq-item">
+        <summary>How long does shipping take?</summary>
+        <div class="faq-answer">
+            Shipping options and delivery estimates
+            will be announced when online checkout
+            becomes available.
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary>Do you accept returns or exchanges?</summary>
+        <div class="faq-answer">
+            Our return and exchange policy is
+            currently being finalized.
+
+            Please check back for updates before
+            placing an order.
+        </div>
+    </details>
+
+    <details class="faq-item">
+        <summary>Do you offer custom nail designs?</summary>
+        <div class="faq-answer">
+            Custom nail design availability has
+            not yet been announced.
+
+            Please contact us with questions
+            about our current collections.
+        </div>
+    </details>
+
+    <!-- CONTACT -->
+
+    <h2 class="faq-category">♡ Other Questions</h2>
+
+    <details class="faq-item">
+        <summary>How can I contact Mooni Mani?</summary>
+        <div class="faq-answer">
+            We'd love to hear from you!
+
+            Visit our
+            <a href="contact.html">Contact Us</a>
+            page for more information.
+        </div>
+    </details>
+
+</main>
+
+<footer>
+
+    © 2026 Mooni Mani ♡
+
+    <br>
+
+    Made with love & a little moonlight.
+
+</footer>
+
+</body>
+</html>
