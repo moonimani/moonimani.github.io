@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shopping Cart | Mooni Mani</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #FFF9F7;
+    color: #594B50;
+}
+
+/* HEADER */
+
+header {
+    background: #FCE9EE;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+.logo {
+    font-size: 38px;
+    font-weight: bold;
+    color: #A66B7B;
+    letter-spacing: 2px;
+}
+
+.tagline {
+    color: #987B85;
+    font-size: 14px;
+}
+
+nav {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #805E69;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #C98FA1;
+}
+
+/* CART PAGE */
+
+.cart-container {
+    max-width: 950px;
+    margin: 60px auto 90px;
+    padding: 20px;
+}
+
+.cart-title {
+    text-align: center;
+    color: #A66B7B;
+    font-size: 36px;
+}
+
+.cart-subtitle {
+    text-align: center;
+    color: #987B85;
+    margin-bottom: 45px;
+}
+
+/* CART BOX */
+
+.cart-box {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 25px 0;
+    border-bottom: 1px solid #F1E5E9;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-details h3 {
+    color: #805E69;
+    margin: 0 0 10px;
+}
+
+.item-details p {
+    color: #987B85;
+    font-size: 14px;
+}
+
+/* QUANTITY BUTTONS */
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-controls button {
+    background: #FCE9EE;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 13px;
+    cursor: pointer;
+    color: #805E69;
+}
+
+.quantity-controls button:hover {
+    background: #F5D5DE;
+}
+
+.remove-button {
+    background: none;
+    border: none;
+    color: #B77B8D;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* ORDER SUMMARY */
+
+.order-summary {
+    margin-top: 35px;
+    padding: 25px;
+    background: #FFF5F7;
+    border-radius: 15px;
+}
+
+.order-summary h2 {
+    color: #A66B7B;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 18px 0;
+}
+
+.total-row {
+    border-top: 1px solid #E9D7DD;
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #A66B7B;
+}
+
+.checkout-button {
+    display: block;
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px;
+    background: #C98FA1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.checkout-button:disabled {
+    background: #D9C9CE;
+    cursor: not-allowed;
+}
+
+.continue-shopping {
+    display: block;
+    text-align: center;
+    margin-top: 25px;
+    color: #A66B7B;
+    text-decoration: none;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 50px 20px;
+    color: #987B85;
+}
+
+/* FOOTER */
+
+footer {
+    background: #FCE9EE;
+    text-align: center;
+    padding: 35px 20px;
+    color: #987B85;
+    font-size: 13px;
+    line-height: 2;
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-box {
+        padding: 20px;
+    }
+
+    .cart-title {
+        font-size: 28px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">☾ Mooni Mani</div>
+
+    <p class="tagline">
+        A little moonlight at your fingertips ✨
+    </p>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#shop">Shop</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html">
+            🛒 Cart (<span id="cart-count">0</span>)
+        </a>
+    </nav>
+</header>
+
+<main class="cart-container">
+
+    <h1 class="cart-title">Your Shopping Cart ♡</h1>
+
+    <p class="cart-subtitle">
+        Your favorite nails are waiting for you 🌙
+    </p>
+
+    <div class="cart-box">
+
+        <div id="cart-items"></div>
+
+        <div class="order-summary">
+
+            <h2>Order Summary</h2>
+
+            <div class="summary-row">
+                <span>Items</span>
+                <span id="total-items">0</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>$<span id="subtotal">0.00</span></span>
+            </div>
+
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>Not calculated</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Tax</span>
+                <span>Not calculated</span>
+            </div>
+
+            <div class="summary-row total-row">
+                <span>Subtotal</span>
+                <span>$<span id="total">0.00</span></span>
+            </div>
+
+            <p style="font-size:13px;color:#987B85;">
+                Shipping and applicable taxes are not included.
+                Online checkout is coming soon.
+            </p>
+
+            <button class="checkout-button" disabled>
+                Checkout Coming Soon ♡
+            </button>
+
+        </div>
+
+        <a href="index.html#shop" class="continue-shopping">
+            ← Continue Shopping
+        </a>
+
+    </div>
+
+</main>
+
+<footer>
+    © 2026 Mooni Mani ♡
+    <br>
+    Made with love & a little moonlight.
+</footer>
+
+<script>
+
+/* MUST MATCH HOMEPAGE PRODUCTS */
+
+const products = [
+    {id:1, name:"Moonlight Collection", price:12},
+    {id:2, name:"Blush Collection", price:12},
+    {id:3, name:"French Tip Collection", price:12},
+    {id:4, name:"Sweetheart Collection", price:12},
+    {id:5, name:"Celestial Collection", price:12}
+];
+
+/* LOAD CART FROM HOMEPAGE */
+
+let cart = [];
+
+try {
+    const saved = JSON.parse(
+        localStorage.getItem("moonimani-cart")
+    );
+
+    if (Array.isArray(saved)) {
+        cart = saved.filter(item =>
+            products.some(p => p.id === item.id) &&
+            ["XS","S","M","L"].includes(item.size) &&
+            Number.isInteger(item.quantity) &&
+            item.quantity > 0
+        );
+    }
+} catch(error) {
+    cart = [];
+}
+
+/* SAVE CART */
+
+function saveCart() {
+    localStorage.setItem(
+        "moonimani-cart",
+        JSON.stringify(cart)
+    );
+}
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(index, amount) {
+    cart[index].quantity += amount;
+
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+    }
+
+    saveCart();
+    displayCart();
+}
+
+/* REMOVE PRODUCT */
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    saveCart();
+    displayCart();
+}
+
+/* DISPLAY CART */
+
+function displayCart() {
+
+    const container = document.getElementById("cart-items");
+
+    container.innerHTML = "";
+
+    let subtotal = 0;
+    let count = 0;
+
+    if (cart.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty-cart">
+                <h2>Your cart is empty 🌙</h2>
+                <p>Let's find your perfect nails!</p>
+                <a href="index.html#shop"
+                   class="continue-shopping">
+                   Shop Our Nails ♡
+                </a>
+            </div>
+        `;
+
+    } else {
+
+        cart.forEach((item, index) => {
+
+            const product = products.find(
+                p => p.id === item.id
+            );
+
+            if (!product) return;
+
+            const itemTotal = product.price * item.quantity;
+
+            subtotal += itemTotal;
+            count += item.quantity;
+
+            const row = document.createElement("div");
+            row.className = "cart-item";
+
+            const details = document.createElement("div");
+            details.className = "item-details";
+
+            const title = document.createElement("h3");
+            title.textContent = product.name;
+
+            const size = document.createElement("p");
+            size.textContent = "Size: " + item.size;
+
+            const price = document.createElement("p");
+            price.textContent =
+                "$" + product.price.toFixed(2) + " each";
+
+            details.append(title, size, price);
+
+            const controls = document.createElement("div");
+            controls.className = "quantity-controls";
+
+            const minus = document.createElement("button");
+            minus.textContent = "−";
+            minus.setAttribute(
+                "aria-label", "Decrease quantity"
+            );
+            minus.onclick = () => changeQuantity(index, -1);
+
+            const quantity = document.createElement("span");
+            quantity.textContent = item.quantity;
+
+            const plus = document.createElement("button");
+            plus.textContent = "+";
+            plus.setAttribute(
+                "aria-label", "Increase quantity"
+            );
+            plus.onclick = () => changeQuantity(index, 1);
+
+            const remove = document.createElement("button");
+            remove.className = "remove-button";
+            remove.textContent = "Remove";
+            remove.onclick = () => removeItem(index);
+
+            const lineTotal = document.createElement("strong");
+            lineTotal.textContent = "$" + itemTotal.toFixed(2);
+
+            controls.append(minus, quantity, plus);
+
+            row.append(details, controls, lineTotal, remove);
+
+            container.appendChild(row);
+
+        });
+    }
+
+    document.getElementById("cart-count").textContent = count;
+    document.getElementById("total-items").textContent = count;
+
+    document.getElementById("subtotal").textContent =
+        subtotal.toFixed(2);
+
+    document.getElementById("total").textContent =
+        subtotal.toFixed(2);
+}
+
+displayCart();
+
+</script>
+
+</body>
+</html>
