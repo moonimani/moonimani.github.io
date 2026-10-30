@@ -30,6 +30,10 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    cursor: not-allowed;
+}
+
 /* HEADER */
 
 header {
@@ -209,7 +213,7 @@ h1 {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 28px;
+    margin-bottom: 12px;
 }
 
 .size-btn {
@@ -224,6 +228,20 @@ h1 {
     background: #38272e;
     color: white;
     border-color: #38272e;
+}
+
+.size-btn:disabled {
+    background: #f5f1f2;
+    color: #b9aeb3;
+    border-color: #e8e0e3;
+    text-decoration: line-through;
+}
+
+.stock-status {
+    min-height: 20px;
+    margin: 0 0 24px;
+    font-size: 13px;
+    color: #9c7585;
 }
 
 /* QUANTITY */
@@ -251,6 +269,10 @@ h1 {
     font-size: 20px;
 }
 
+.quantity-control button:disabled {
+    color: #c7bec2;
+}
+
 .quantity-control span {
     width: 45px;
     text-align: center;
@@ -269,8 +291,13 @@ h1 {
     font-size: 15px;
 }
 
-.add-cart:hover {
+.add-cart:hover:not(:disabled) {
     background: #644452;
+}
+
+.add-cart:disabled {
+    background: #c7b8bf;
+    color: white;
 }
 
 .notice {
@@ -435,11 +462,19 @@ footer {
                     ♡ Product photo coming soon
                 </span>
 
-                <button class="gallery-arrow prev" id="prev-photo">
+                <button
+                    class="gallery-arrow prev"
+                    id="prev-photo"
+                    type="button"
+                >
                     ‹
                 </button>
 
-                <button class="gallery-arrow next" id="next-photo">
+                <button
+                    class="gallery-arrow next"
+                    id="next-photo"
+                    type="button"
+                >
                     ›
                 </button>
 
@@ -485,12 +520,52 @@ footer {
 
             <div class="size-options" id="size-options">
 
-                <button class="size-btn" data-size="XS">XS</button>
-                <button class="size-btn" data-size="S">S</button>
-                <button class="size-btn" data-size="M">M</button>
-                <button class="size-btn" data-size="L">L</button>
+                <button
+                    class="size-btn"
+                    data-size="XS"
+                    type="button"
+                    disabled
+                >
+                    XS
+                </button>
+
+                <button
+                    class="size-btn"
+                    data-size="S"
+                    type="button"
+                    disabled
+                >
+                    S
+                </button>
+
+                <button
+                    class="size-btn"
+                    data-size="M"
+                    type="button"
+                    disabled
+                >
+                    M
+                </button>
+
+                <button
+                    class="size-btn"
+                    data-size="L"
+                    type="button"
+                    disabled
+                >
+                    L
+                </button>
 
             </div>
+
+            <p
+                class="stock-status"
+                id="stock-status"
+                role="status"
+                aria-live="polite"
+            >
+                Checking availability…
+            </p>
 
 
             <!-- QUANTITY -->
@@ -501,19 +576,28 @@ footer {
 
             <div class="quantity-control">
 
-                <button id="decrease" type="button">−</button>
+                <button id="decrease" type="button" disabled>
+                    −
+                </button>
 
                 <span id="quantity">1</span>
 
-                <button id="increase" type="button">+</button>
+                <button id="increase" type="button" disabled>
+                    +
+                </button>
 
             </div>
 
 
             <!-- ADD TO CART -->
 
-            <button class="add-cart" id="add-cart">
-                Add to Cart
+            <button
+                class="add-cart"
+                id="add-cart"
+                type="button"
+                disabled
+            >
+                Checking availability…
             </button>
 
 
@@ -562,7 +646,11 @@ footer {
 
 <dialog id="size-guide">
 
-    <button class="close-modal" id="close-guide">
+    <button
+        class="close-modal"
+        id="close-guide"
+        type="button"
+    >
         ×
     </button>
 
@@ -595,12 +683,14 @@ footer {
 </footer>
 
 
-<!-- STEP 2: CONNECT INVENTORY FILE -->
+<!-- SUPABASE INVENTORY FILES -->
 
 <script src="inventory.js"></script>
 <script src="supabase-config.js"></script>
 <script src="supabase-inventory.js"></script>
-<!-- EXISTING PRODUCT JAVASCRIPT -->
+
+
+<!-- PRODUCT JAVASCRIPT -->
 
 <script>
 
@@ -676,6 +766,27 @@ let currentPhoto = 0;
 
 
 // =====================================
+// LIVE INVENTORY STATE
+// =====================================
+
+const sizes = ["XS", "S", "M", "L"];
+
+const liveStock = {};
+
+let inventoryLoaded = false;
+
+let inventoryError = false;
+
+let addingToCart = false;
+
+const statusElement = document.getElementById("stock-status");
+
+const addButton = document.getElementById("add-cart");
+
+const sizeButtons = document.querySelectorAll(".size-btn");
+
+
+// =====================================
 // DISPLAY PRODUCT INFORMATION
 // =====================================
 
@@ -726,7 +837,7 @@ function renderGallery() {
 
     } else {
 
-        photoContent.innerHTML =
+        photoContent.textContent =
             "♡ Product photo coming soon";
 
     }
@@ -740,7 +851,8 @@ function renderGallery() {
 
         if (image) {
 
-            button.innerHTML = `<img src="${image}" alt="Product thumbnail">`;
+            button.innerHTML =
+                `<img src="${image}" alt="Product thumbnail">`;
 
         } else {
 
@@ -789,63 +901,6 @@ document.getElementById("next-photo").onclick = () => {
 
 
 // =====================================
-// SIZE SELECTION
-// =====================================
-
-document.querySelectorAll(".size-btn").forEach(button => {
-
-    button.onclick = () => {
-
-        selectedSize = button.dataset.size;
-
-        document.getElementById("selected-size").textContent =
-            selectedSize;
-
-        document.querySelectorAll(".size-btn").forEach(b => {
-
-            b.classList.toggle("selected", b === button);
-
-        });
-
-    };
-
-});
-
-
-// =====================================
-// QUANTITY
-// =====================================
-
-function updateQuantity() {
-
-    document.getElementById("quantity").textContent = quantity;
-
-    updatePrice();
-
-}
-
-document.getElementById("decrease").onclick = () => {
-
-    if (quantity > 1) {
-
-        quantity--;
-
-        updateQuantity();
-
-    }
-
-};
-
-document.getElementById("increase").onclick = () => {
-
-    quantity++;
-
-    updateQuantity();
-
-};
-
-
-// =====================================
 // CART STORAGE
 // =====================================
 
@@ -878,12 +933,307 @@ function updateCartCount() {
 
 }
 
+function quantityAlreadyInCart(size) {
+
+    return readCart().reduce((total, item) => {
+
+        if (
+            Number(item.id) === product.id &&
+            item.size === size
+        ) {
+
+            return total + (Number(item.quantity) || 0);
+
+        }
+
+        return total;
+
+    }, 0);
+
+}
+
+
+// =====================================
+// LIVE INVENTORY HELPERS
+// =====================================
+
+function stockFor(size) {
+
+    return liveStock[size];
+
+}
+
+function remainingFor(size) {
+
+    const stock = stockFor(size);
+
+    if (!Number.isInteger(stock) || stock < 0) {
+        return 0;
+    }
+
+    return Math.max(
+        0,
+        stock - quantityAlreadyInCart(size)
+    );
+
+}
+
+
+// =====================================
+// UPDATE SOLD OUT DISPLAY
+// =====================================
+
+function updateAvailability() {
+
+    const selectedStock = selectedSize
+        ? stockFor(selectedSize)
+        : undefined;
+
+    const remaining = selectedSize
+        ? remainingFor(selectedSize)
+        : 0;
+
+    sizeButtons.forEach(button => {
+
+        const size = button.dataset.size;
+
+        const stock = stockFor(size);
+
+        const available =
+            inventoryLoaded &&
+            !inventoryError &&
+            Number.isInteger(stock) &&
+            stock > 0;
+
+        button.disabled = !available || addingToCart;
+
+        button.classList.toggle(
+            "selected",
+            selectedSize === size
+        );
+
+    });
+
+    if (!inventoryLoaded) {
+
+        statusElement.textContent =
+            "Checking availability…";
+
+        addButton.textContent =
+            "Checking availability…";
+
+    } else if (inventoryError) {
+
+        statusElement.textContent =
+            "Availability is temporarily unavailable.";
+
+        addButton.textContent =
+            "Unavailable";
+
+    } else if (
+        sizes.every(size => stockFor(size) === 0)
+    ) {
+
+        statusElement.textContent = "SOLD OUT";
+
+        addButton.textContent = "SOLD OUT";
+
+    } else if (!selectedSize) {
+
+        statusElement.textContent =
+            "Please select an available size.";
+
+        addButton.textContent =
+            "Add to Cart";
+
+    } else if (selectedStock === 0) {
+
+        statusElement.textContent = "SOLD OUT";
+
+        addButton.textContent = "SOLD OUT";
+
+    } else if (remaining === 0) {
+
+        statusElement.textContent =
+            "You already have the available stock in your cart.";
+
+        addButton.textContent =
+            "Unavailable";
+
+    } else {
+
+        statusElement.textContent = "In stock ♡";
+
+        addButton.textContent = "Add to Cart";
+
+    }
+
+    const canAdd =
+        inventoryLoaded &&
+        !inventoryError &&
+        !addingToCart &&
+        Boolean(selectedSize) &&
+        remaining >= quantity;
+
+    addButton.disabled = !canAdd;
+
+    document.getElementById("decrease").disabled =
+        !inventoryLoaded ||
+        inventoryError ||
+        addingToCart ||
+        quantity <= 1;
+
+    document.getElementById("increase").disabled =
+        !inventoryLoaded ||
+        inventoryError ||
+        addingToCart ||
+        !selectedSize ||
+        quantity >= remaining;
+
+}
+
+
+// =====================================
+// LOAD INVENTORY FROM SUPABASE
+// =====================================
+
+async function loadInventory() {
+
+    inventoryLoaded = false;
+
+    inventoryError = false;
+
+    updateAvailability();
+
+    try {
+
+        if (typeof getLiveStock !== "function") {
+
+            throw new Error(
+                "Supabase inventory function is missing."
+            );
+
+        }
+
+        const results = await Promise.all(
+            sizes.map(size => getLiveStock(product.id, size))
+        );
+
+        if (
+            results.some(stock =>
+                !Number.isInteger(stock) || stock < 0
+            )
+        ) {
+
+            throw new Error(
+                "Could not verify inventory."
+            );
+
+        }
+
+        sizes.forEach((size, index) => {
+
+            liveStock[size] = results[index];
+
+        });
+
+    } catch (error) {
+
+        console.error("Inventory loading error:", error);
+
+        inventoryError = true;
+
+    } finally {
+
+        inventoryLoaded = true;
+
+        updateAvailability();
+
+    }
+
+}
+
+
+// =====================================
+// SIZE SELECTION
+// =====================================
+
+sizeButtons.forEach(button => {
+
+    button.onclick = () => {
+
+        if (button.disabled) {
+            return;
+        }
+
+        selectedSize = button.dataset.size;
+
+        quantity = 1;
+
+        document.getElementById("selected-size").textContent =
+            selectedSize;
+
+        updateQuantity();
+
+        updateAvailability();
+
+    };
+
+});
+
+
+// =====================================
+// QUANTITY
+// =====================================
+
+function updateQuantity() {
+
+    document.getElementById("quantity").textContent = quantity;
+
+    updatePrice();
+
+    updateAvailability();
+
+}
+
+document.getElementById("decrease").onclick = () => {
+
+    if (quantity > 1) {
+
+        quantity--;
+
+        updateQuantity();
+
+    }
+
+};
+
+document.getElementById("increase").onclick = () => {
+
+    if (!selectedSize) {
+        return;
+    }
+
+    if (quantity < remainingFor(selectedSize)) {
+
+        quantity++;
+
+        updateQuantity();
+
+    }
+
+};
+
 
 // =====================================
 // ADD TO CART
 // =====================================
 
-document.getElementById("add-cart").onclick = () => {
+addButton.onclick = async () => {
+
+    if (addingToCart || inventoryError || !inventoryLoaded) {
+        return;
+    }
 
     if (!selectedSize) {
 
@@ -893,35 +1243,96 @@ document.getElementById("add-cart").onclick = () => {
 
     }
 
-    const cart = readCart();
+    addingToCart = true;
 
-    const existing = cart.find(item =>
-        Number(item.id) === product.id &&
-        item.size === selectedSize
-    );
+    updateAvailability();
 
-    if (existing) {
+    try {
 
-        existing.quantity += quantity;
+        // Check Supabase again before adding to cart.
 
-    } else {
+        const latestStock = await getLiveStock(
+            product.id,
+            selectedSize
+        );
 
-        cart.push({
-            id: product.id,
-            size: selectedSize,
-            quantity: quantity
-        });
+        if (
+            !Number.isInteger(latestStock) ||
+            latestStock < 0
+        ) {
+
+            throw new Error(
+                "Unable to verify current stock."
+            );
+
+        }
+
+        liveStock[selectedSize] = latestStock;
+
+        const remaining = remainingFor(selectedSize);
+
+        if (remaining < quantity) {
+
+            alert(
+                remaining === 0
+                    ? "Sorry, this size is currently unavailable ♡"
+                    : "There isn't enough stock for that quantity ♡"
+            );
+
+            return;
+
+        }
+
+        const cart = readCart();
+
+        const existing = cart.find(item =>
+            Number(item.id) === product.id &&
+            item.size === selectedSize
+        );
+
+        if (existing) {
+
+            existing.quantity =
+                Number(existing.quantity) + quantity;
+
+        } else {
+
+            cart.push({
+                id: product.id,
+                size: selectedSize,
+                quantity: quantity
+            });
+
+        }
+
+        localStorage.setItem(
+            "moonimani-cart",
+            JSON.stringify(cart)
+        );
+
+        updateCartCount();
+
+        alert(`${product.name} added to your cart ♡`);
+
+        quantity = 1;
+
+        updateQuantity();
+
+    } catch (error) {
+
+        console.error("Add to cart error:", error);
+
+        alert(
+            "We couldn't verify availability. Please try again ♡"
+        );
+
+    } finally {
+
+        addingToCart = false;
+
+        updateAvailability();
 
     }
-
-    localStorage.setItem(
-        "moonimani-cart",
-        JSON.stringify(cart)
-    );
-
-    updateCartCount();
-
-    alert(`${product.name} added to your cart ♡`);
 
 };
 
@@ -954,6 +1365,10 @@ renderGallery();
 updatePrice();
 
 updateCartCount();
+
+updateAvailability();
+
+loadInventory();
 
 </script>
 
