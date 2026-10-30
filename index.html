@@ -1,212 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Mooni Mani | Shop All Nails</title>
+
 <style>
-* { box-sizing: border-box; }
-body { margin: 0; font-family: Arial, sans-serif; background: #fffcfb; color: #38272e; }
-a { color: inherit; text-decoration: none; }
-button, select { font: inherit; cursor: pointer; }
-header { background: #f9e9ee; text-align: center; padding: 26px 15px; }
-.logo { font: bold 32px Georgia, serif; letter-spacing: 2px; }
-.tagline { color: #9c7585; font-size: 12px; letter-spacing: 1px; }
-nav { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 22px; font-size: 14px; }
-nav a:hover { color: #b87890; }
-main { max-width: 1250px; margin: auto; padding: 45px 25px 85px; }
-h1 { font-size: 42px; margin-bottom: 28px; }
-.filters { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 25px; }
-.filter { background: white; border: 1px solid #e9dfe2; border-radius: 25px; padding: 11px 18px; }
-.filter.active { background: #38272e; color: white; }
-.toolbar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eadfe2; padding-bottom: 20px; margin-bottom: 30px; color: #8d7980; font-size: 14px; }
-.toolbar select { padding: 10px; border: 1px solid #eadfe2; border-radius: 8px; background: white; }
-.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px 20px; }
-.photo { position: relative; aspect-ratio: 1 / 1.1; background: #f6e9ed; border-radius: 12px; display: flex; justify-content: center; align-items: center; text-align: center; color: #a88896; overflow: hidden; }
-.photo img { width: 100%; height: 100%; object-fit: cover; }
-.photo-link { display: block; }
-.photo-link:hover { opacity: .85; }
-.card h3 { font-size: 16px; margin: 14px 0 7px; }
-.meta { color: #8d7980; font-size: 13px; margin-bottom: 9px; }
-.price { font-weight: bold; }
-.buy-row { display: flex; gap: 8px; margin-top: 13px; }
-.buy-row select { min-width: 0; flex: 1; padding: 10px; border: 1px solid #eadfe2; border-radius: 8px; background: white; }
-.add { background: #b87890; color: white; border: 0; border-radius: 8px; padding: 11px; }
-footer { background: #f9e9ee; text-align: center; padding: 30px; font-size: 13px; color: #806b74; }
-@media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 650px) {
-  .grid { grid-template-columns: repeat(2, 1fr); gap: 25px 12px; }
-  h1 { font-size: 32px; }
-  .buy-row { flex-direction: column; }
-  nav { gap: 14px; }
+
+* {
+    box-sizing: border-box;
 }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fffcfb;
+    color: #38272e;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, select {
+    font: inherit;
+    cursor: pointer;
+}
+
+/* HEADER */
+
+header {
+    background: #f9e9ee;
+    text-align: center;
+    padding: 26px 15px;
+}
+
+.logo {
+    font: bold 32px Georgia, serif;
+    letter-spacing: 2px;
+}
+
+.tagline {
+    color: #9c7585;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* NAVIGATION */
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #b87890;
+}
+
+/* MAIN */
+
+main {
+    max-width: 1250px;
+    margin: auto;
+    padding: 45px 25px 85px;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 28px;
+}
+
+/* FILTER BUTTONS */
+
+.filters {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.filter {
+    background: white;
+    border: 1px solid #e9dfe2;
+    border-radius: 25px;
+    padding: 11px 18px;
+}
+
+.filter.active {
+    background: #38272e;
+    color: white;
+}
+
+/* SORTING */
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eadfe2;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    color: #8d7980;
+    font-size: 14px;
+}
+
+.toolbar select {
+    padding: 10px;
+    border: 1px solid #eadfe2;
+    border-radius: 8px;
+    background: white;
+}
+
+/* PRODUCT GRID */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 35px 20px;
+}
+
+/* PRODUCT PHOTOS */
+
+.photo {
+    aspect-ratio: 1 / 1.1;
+    background: #f6e9ed;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #a88896;
+    overflow: hidden;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-link {
+    display: block;
+}
+
+.photo-link:hover {
+    opacity: 0.85;
+}
+
+/* PRODUCT DETAILS */
+
+.card h3 {
+    font-size: 16px;
+    margin: 14px 0 7px;
+}
+
+.card h3 a:hover {
+    color: #b87890;
+}
+
+.meta {
+    color: #8d7980;
+    font-size: 13px;
+    margin-bottom: 9px;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #f9e9ee;
+    text-align: center;
+    padding: 30px;
+    font-size: 13px;
+    color: #806b74;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px 12px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    nav {
+        gap: 14px;
+    }
+
+}
+
 </style>
 </head>
+
 <body>
 
+<!-- HEADER -->
+
 <header>
-  <div class="logo">☾ Mooni Mani</div>
-  <p class="tagline">A little moonlight at your fingertips ✨</p>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="index.html#shop">Shop</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contact.html">Contact</a>
-    <a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
-  </nav>
+
+    <div class="logo">
+        ☾ Mooni Mani
+    </div>
+
+    <p class="tagline">
+        A little moonlight at your fingertips ✨
+    </p>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="index.html#shop">Shop</a>
+
+        <a href="faq.html">FAQ</a>
+
+        <a href="contact.html">Contact</a>
+
+        <a href="cart.html">
+            🛒 Cart (<span id="cart-count">0</span>)
+        </a>
+
+    </nav>
+
 </header>
 
+
+<!-- SHOP -->
+
 <main id="shop">
-  <h1>Shop All Nails</h1>
 
-  <div class="filters">
-    <button class="filter active" data-filter="All">All</button>
-    <button class="filter" data-filter="Almond">Almond</button>
-    <button class="filter" data-filter="Coffin">Coffin</button>
-    <button class="filter" data-filter="Stiletto">Stiletto</button>
-    <button class="filter" data-filter="Square">Square</button>
-    <button class="filter" data-filter="Oval">Oval</button>
-    <button class="filter" data-filter="Short">Short</button>
-    <button class="filter" data-filter="Medium">Medium</button>
-    <button class="filter" data-filter="Long">Long</button>
-  </div>
+    <h1>Shop All Nails</h1>
 
-  <div class="toolbar">
-    <span id="count">5 sets</span>
-    <label>Sort by:
-      <select id="sort">
-        <option value="featured">Featured</option>
-        <option value="az">Alphabetically, A–Z</option>
-        <option value="za">Alphabetically, Z–A</option>
-        <option value="low">Price, low to high</option>
-        <option value="high">Price, high to low</option>
-      </select>
-    </label>
-  </div>
+    <!-- FILTERS -->
 
-  <div class="grid" id="grid"></div>
+    <div class="filters">
+
+        <button class="filter active" data-filter="All">
+            All
+        </button>
+
+        <button class="filter" data-filter="Almond">
+            Almond
+        </button>
+
+        <button class="filter" data-filter="Coffin">
+            Coffin
+        </button>
+
+        <button class="filter" data-filter="Stiletto">
+            Stiletto
+        </button>
+
+        <button class="filter" data-filter="Square">
+            Square
+        </button>
+
+        <button class="filter" data-filter="Oval">
+            Oval
+        </button>
+
+        <button class="filter" data-filter="Short">
+            Short
+        </button>
+
+        <button class="filter" data-filter="Medium">
+            Medium
+        </button>
+
+        <button class="filter" data-filter="Long">
+            Long
+        </button>
+
+    </div>
+
+
+    <!-- SORTING -->
+
+    <div class="toolbar">
+
+        <span id="count">5 sets</span>
+
+        <label>
+            Sort by:
+
+            <select id="sort">
+
+                <option value="featured">Featured</option>
+
+                <option value="az">
+                    Alphabetically, A–Z
+                </option>
+
+                <option value="za">
+                    Alphabetically, Z–A
+                </option>
+
+                <option value="low">
+                    Price, low to high
+                </option>
+
+                <option value="high">
+                    Price, high to low
+                </option>
+
+            </select>
+
+        </label>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div class="grid" id="grid"></div>
+
 </main>
 
-<footer>© 2026 Mooni Mani ♡ — Made with love & a little moonlight.</footer>
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 Mooni Mani ♡
+
+    <br><br>
+
+    Made with love & a little moonlight.
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
 
 <script>
+
+/* PRODUCT DATA */
+
 const products = [
-  { id: 1, name: "Moonlight Collection", shape: "Almond", length: "Medium", price: 12, image: "" },
-  { id: 2, name: "Blush Collection", shape: "Square", length: "Short", price: 12, image: "" },
-  { id: 3, name: "French Tip Collection", shape: "Oval", length: "Short", price: 12, image: "" },
-  { id: 4, name: "Sweetheart Collection", shape: "Coffin", length: "Long", price: 12, image: "" },
-  { id: 5, name: "Celestial Collection", shape: "Stiletto", length: "Long", price: 12, image: "" }
+
+    {
+        id: 1,
+        name: "Moonlight Collection",
+        shape: "Almond",
+        length: "Medium",
+        price: 12,
+        image: ""
+    },
+
+    {
+        id: 2,
+        name: "Blush Collection",
+        shape: "Square",
+        length: "Short",
+        price: 12,
+        image: ""
+    },
+
+    {
+        id: 3,
+        name: "French Tip Collection",
+        shape: "Oval",
+        length: "Short",
+        price: 12,
+        image: ""
+    },
+
+    {
+        id: 4,
+        name: "Sweetheart Collection",
+        shape: "Coffin",
+        length: "Long",
+        price: 12,
+        image: ""
+    },
+
+    {
+        id: 5,
+        name: "Celestial Collection",
+        shape: "Stiletto",
+        length: "Long",
+        price: 12,
+        image: ""
+    }
+
 ];
+
+
+/* FILTER */
 
 let activeFilter = "All";
 
+
+/* READ CART */
+
 function readCart() {
-  try {
-    const cart = JSON.parse(localStorage.getItem("moonimani-cart"));
-    return Array.isArray(cart) ? cart : [];
-  } catch {
-    return [];
-  }
+
+    try {
+
+        const cart = JSON.parse(
+            localStorage.getItem("moonimani-cart")
+        );
+
+        return Array.isArray(cart) ? cart : [];
+
+    } catch {
+
+        return [];
+
+    }
+
 }
+
+
+/* UPDATE CART COUNT */
 
 function updateCount() {
-  const count = readCart().reduce((total, item) => total + item.quantity, 0);
-  document.getElementById("cart-count").textContent = count;
+
+    const count = readCart().reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
+
+    document.getElementById("cart-count").textContent = count;
+
 }
 
-function addToCart(product, size) {
-  if (!size) {
-    alert("Please choose your nail size first ♡");
-    return;
-  }
 
-  const cart = readCart();
-  const existing = cart.find(item => item.id === product.id && item.size === size);
-
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push({ id: product.id, size: size, quantity: 1 });
-  }
-
-  localStorage.setItem("moonimani-cart", JSON.stringify(cart));
-  updateCount();
-  alert(product.name + " added to cart ♡");
-}
+/* DISPLAY PRODUCTS */
 
 function renderProducts() {
-  let list = products.filter(p =>
-    activeFilter === "All" ||
-    p.shape === activeFilter ||
-    p.length === activeFilter
-  );
 
-  const sort = document.getElementById("sort").value;
+    let list = products.filter(product =>
 
-  if (sort === "az") list.sort((a,b) => a.name.localeCompare(b.name));
-  if (sort === "za") list.sort((a,b) => b.name.localeCompare(a.name));
-  if (sort === "low") list.sort((a,b) => a.price - b.price);
-  if (sort === "high") list.sort((a,b) => b.price - a.price);
+        activeFilter === "All" ||
 
-  document.getElementById("count").textContent = list.length + " sets";
+        product.shape === activeFilter ||
 
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
+        product.length === activeFilter
 
-  list.forEach(product => {
-    const card = document.createElement("article");
-    card.className = "card";
+    );
 
-    const photo = product.image
-      ? `<img src="${product.image}" alt="${product.name}">`
-      : "♡<br>Product photo coming soon";
 
-    card.innerHTML = `
-      <a class="photo-link" href="product.html?id=${product.id}">
-        <div class="photo">${photo}</div>
-      </a>
+    /* SORT PRODUCTS */
 
-      <h3>
-        <a href="product.html?id=${product.id}">${product.name}</a>
-      </h3>
+    const sort = document.getElementById("sort").value;
 
-      <div class="meta">${product.length} ${product.shape}</div>
-      <div class="price">$${product.price.toFixed(2)}</div>
+    if (sort === "az") {
 
-      <div class="buy-row">
-        <select aria-label="Select nail size">
-          <option value="">Select size</option>
-          <option>XS</option>
-          <option>S</option>
-          <option>M</option>
-          <option>L</option>
-        </select>
-        <button class="add">Add to Cart ♡</button>
-      </div>
-    `;
+        list.sort((a, b) => a.name.localeCompare(b.name));
 
-    card.querySelector(".add").onclick = () => {
-      addToCart(product, card.querySelector("select").value);
-    };
+    }
 
-    grid.appendChild(card);
-  });
+    if (sort === "za") {
+
+        list.sort((a, b) => b.name.localeCompare(a.name));
+
+    }
+
+    if (sort === "low") {
+
+        list.sort((a, b) => a.price - b.price);
+
+    }
+
+    if (sort === "high") {
+
+        list.sort((a, b) => b.price - a.price);
+
+    }
+
+
+    /* PRODUCT COUNT */
+
+    document.getElementById("count").textContent =
+        list.length + " sets";
+
+
+    /* PRODUCT GRID */
+
+    const grid = document.getElementById("grid");
+
+    grid.innerHTML = "";
+
+
+    list.forEach(product => {
+
+        const card = document.createElement("article");
+
+        card.className = "card";
+
+
+        /* PRODUCT PHOTO */
+
+        const photo = product.image
+
+            ? `<img src="${product.image}" alt="${product.name}">`
+
+            : "♡<br>Product photo coming soon";
+
+
+        /* PRODUCT CARD */
+
+        card.innerHTML = `
+
+            <a
+                class="photo-link"
+                href="product.html?id=${product.id}"
+            >
+
+                <div class="photo">
+
+                    ${photo}
+
+                </div>
+
+            </a>
+
+
+            <h3>
+
+                <a href="product.html?id=${product.id}">
+
+                    ${product.name}
+
+                </a>
+
+            </h3>
+
+
+            <div class="meta">
+
+                ${product.length} ${product.shape}
+
+            </div>
+
+
+            <div class="price">
+
+                $${product.price.toFixed(2)}
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
 }
 
+
+/* FILTER BUTTONS */
+
 document.querySelectorAll(".filter").forEach(button => {
-  button.onclick = () => {
-    activeFilter = button.dataset.filter;
-    document.querySelectorAll(".filter").forEach(b => {
-      b.classList.toggle("active", b === button);
-    });
-    renderProducts();
-  };
+
+    button.onclick = () => {
+
+        activeFilter = button.dataset.filter;
+
+        document.querySelectorAll(".filter").forEach(b => {
+
+            b.classList.toggle(
+                "active",
+                b === button
+            );
+
+        });
+
+        renderProducts();
+
+    };
+
 });
+
+
+/* SORT DROPDOWN */
 
 document.getElementById("sort").onchange = renderProducts;
 
+
+/* INITIALIZE */
+
 updateCount();
+
 renderProducts();
+
 </script>
+
 </body>
 </html>
