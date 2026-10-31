@@ -155,10 +155,10 @@ h1 {
    
     /* Peach Veil only */
 
-.photo img[src*="PeachVeil"] {
+.photo:has(a[href*="id=2"]) img {
     object-fit: contain;
-    padding: 15px;
-    box-sizing: border-box;
+    width: 85%;
+    height: 85%;
 }
 
 .photo-link {
