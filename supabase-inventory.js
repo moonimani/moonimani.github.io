@@ -2,8 +2,12 @@ async function getLiveStock(productId, size) {
   const sku = getSKU(productId, size);
 
   try {
+    const baseURL = SUPABASE_URL
+      .replace(/\/rest\/v1\/?$/, "")
+      .replace(/\/$/, "");
+
     const response = await fetch(
-      `${`${SUPABASE_URL.replace(/\/rest\/v1\/?$/, "").replace(/\/$/, "")}/rest/v1/inventory?sku=eq.${encodeURIComponent(sku)}&select=stock`,
+      `${baseURL}/rest/v1/inventory?sku=eq.${encodeURIComponent(sku)}&select=stock`,
       {
         headers: {
           apikey: SUPABASE_PUBLISHABLE_KEY
@@ -23,6 +27,7 @@ async function getLiveStock(productId, size) {
     }
 
     return data[0].stock;
+
   } catch (error) {
     console.error("Inventory error:", error);
 
