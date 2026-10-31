@@ -21,7 +21,6 @@ async function getLiveStock(productId, size) {
 
     const data = await response.json();
 
-    // If the product is not in the database, it is unavailable.
     if (data.length === 0) {
       return 0;
     }
@@ -30,8 +29,6 @@ async function getLiveStock(productId, size) {
 
   } catch (error) {
     console.error("Inventory error:", error);
-
-    // Don't allow purchases when inventory cannot be verified.
     return null;
   }
 }
