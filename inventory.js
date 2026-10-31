@@ -13,7 +13,7 @@ const inventory = {
     "MM-001-M": 5,
     "MM-001-L": 5,
 
-    // BLUSH COLLECTION
+    // PEACH VEIL
     "MM-002-XS": 5,
     "MM-002-S": 5,
     "MM-002-M": 5,
